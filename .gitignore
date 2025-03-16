@@ -1,3 +1,7 @@
+.mvn/wrapper/
+.idea/
+2.2.1. spring_hibernate/target
+2.2.1. spring_hibernate/spring_hibernate.iml
 # Default ignored files
 /shelf/
 /workspace.xml

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +24,7 @@ public class Car {
 
     public Car() {}
 
-    public Car(Long id, String model, int series) {
-        this.id = id;
+    public Car(String model, int series) {
         this.model = model;
         this.series = series;
     }
