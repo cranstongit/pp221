@@ -16,6 +16,12 @@ public class UserDaoImp implements UserDao {
    private SessionFactory sessionFactory;
 
    @Override
+   public void deleteTable(String table) {
+      String hql = "DROP TABLE IF EXISTS " + table;
+      sessionFactory.getCurrentSession().createNativeQuery(hql).executeUpdate();
+   }
+
+   @Override
    public void add(User user) {
       sessionFactory.getCurrentSession().save(user);
    }
@@ -26,16 +32,13 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   public User get(String model, int series) {
-
-      return new User();
+   public List<User> getByCar(String model, int series) {
+      String hql = "SELECT u FROM User u JOIN u.carId c WHERE c.model = :model AND c.series = :series";
+      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
+      query.setParameter("model", model);
+      query.setParameter("series", series);
+      return query.getResultList();
    }
-
-//   @Override
-//   @Transactional(readOnly = true)
-//   public User getUserById(Long id) {
-//      return sessionFactory.getCurrentSession().get(User.class, id);
-//   }
 
    @Override
    @SuppressWarnings("unchecked")

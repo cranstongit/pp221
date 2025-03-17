@@ -78,6 +78,7 @@ public class User {
       sb.append(", firstName: ").append(firstName);
       sb.append(", lastName: ").append(lastName);
       sb.append(", email: ").append(email).append("\n");
+      sb.append("carId: ").append(carId).append("\n");
       return sb.toString();
    }
 }

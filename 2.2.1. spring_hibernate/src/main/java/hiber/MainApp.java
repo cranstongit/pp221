@@ -16,15 +16,20 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-      userService.add(new Car("Honda", 100));
-      userService.add(new Car("Ford", 200));
+      userService.deleteTable("users");
+      userService.deleteTable("cars");
 
+      User user1 = new User("User1", "Lastname1", "user1@mail.ru");
+      User user2 = new User("User2", "Lastname2", "user2@mail.ru");
+      User user3 = new User("User3", "Lastname3", "user3@mail.ru");
+      Car car1 = new Car("Honda", 100);
+      Car car2 = new Car("Ford", 200);
 
-//      User user1 = userService.g
-//      user.setCarId(car1);
-//      userService.add(user5);
+      userService.add(user1);
+      userService.add(user2);
+      userService.add(user3);
+      userService.add(car1);
+      userService.add(car2);
 
       List<User> users = userService.listUsers();
       for (User user : users) {
@@ -34,6 +39,22 @@ public class MainApp {
          System.out.println("Email = "+user.getEmail());
          System.out.println();
       }
+
+      user1.setCarId(car1);
+      user2.setCarId(car2);
+      user1.setCarId(car2);
+
+      List<User> usersWithHonda = userService.getByCar("Hodna", 100);
+      List<User> usersWithFord = userService.getByCar("Ford", 200);
+
+      for (User user : usersWithHonda) {
+         System.out.println(user);
+      }
+
+      for (User user : usersWithFord) {
+         System.out.println(user);
+      }
+
       context.close();
    }
 }
