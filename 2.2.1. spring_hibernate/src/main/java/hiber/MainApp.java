@@ -11,13 +11,10 @@ import java.util.List;
 
 public class MainApp {
    public static void main(String[] args) throws SQLException {
-      AnnotationConfigApplicationContext context = 
+      AnnotationConfigApplicationContext context =
             new AnnotationConfigApplicationContext(AppConfig.class);
 
       UserService userService = context.getBean(UserService.class);
-
-      userService.deleteTable("users");
-      userService.deleteTable("cars");
 
       User user1 = new User("User1", "Lastname1", "user1@mail.ru");
       User user2 = new User("User2", "Lastname2", "user2@mail.ru");
@@ -25,13 +22,16 @@ public class MainApp {
       Car car1 = new Car("Honda", 100);
       Car car2 = new Car("Ford", 200);
 
+      user1.setCarId(car2);
+      user2.setCarId(car1);
+      user3.setCarId(car1);
+
       userService.add(user1);
       userService.add(user2);
       userService.add(user3);
-      userService.add(car1);
-      userService.add(car2);
 
       List<User> users = userService.listUsers();
+      //оставляю на всякий случай т.к. это было изначальной заготовке
       for (User user : users) {
          System.out.println("Id = "+user.getId());
          System.out.println("First Name = "+user.getFirstName());
@@ -40,11 +40,7 @@ public class MainApp {
          System.out.println();
       }
 
-      user1.setCarId(car1);
-      user2.setCarId(car2);
-      user1.setCarId(car2);
-
-      List<User> usersWithHonda = userService.getByCar("Hodna", 100);
+      List<User> usersWithHonda = userService.getByCar("Honda", 100);
       List<User> usersWithFord = userService.getByCar("Ford", 200);
 
       for (User user : usersWithHonda) {
@@ -54,6 +50,13 @@ public class MainApp {
       for (User user : usersWithFord) {
          System.out.println(user);
       }
+
+     /* добавил два метода удаления таблиц для упрощения тестирования,
+      * чтобы не плодить одинаковых пользователей в таблице каждый раз
+      * при вызове метода MainApp
+      */
+      userService.deleteTable("users");
+      userService.deleteTable("cars");
 
       context.close();
    }

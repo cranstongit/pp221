@@ -15,8 +15,8 @@ public class UserServiceImp implements UserService {
    @Autowired
    private UserDao userDao;
 
-   @Override
    @Transactional
+   @Override
    public void deleteTable(String table) {
       userDao.deleteTable(table);
    }
@@ -31,12 +31,6 @@ public class UserServiceImp implements UserService {
    @Override
    public List<User> getByCar(String model, int series) {
       return userDao.getByCar(model, series);
-   }
-
-   @Transactional
-   @Override
-   public void add(Car car) {
-      userDao.add(car);
    }
 
    @Transactional(readOnly = true)

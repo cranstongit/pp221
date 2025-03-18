@@ -52,4 +52,12 @@ public class Car {
     public int getSeries() {
         return series;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append("model - ").append(model);
+        sb.append(", series - ").append(series);
+        return sb.toString();
+    }
 }

@@ -67,17 +67,15 @@ public class User {
       return carId;
    }
 
-   public void setCarId(Car carId) {
-      this.carId = carId;
-   }
+   public void setCarId(Car carId) { this.carId = carId; }
 
    @Override
    public String toString() {
       final StringBuilder sb = new StringBuilder("User - ");
-      sb.append("id: ").append(id);
-      sb.append(", firstName: ").append(firstName);
-      sb.append(", lastName: ").append(lastName);
-      sb.append(", email: ").append(email).append("\n");
+      sb.append("id: ").append(id).append("\n");
+      sb.append("firstName: ").append(firstName).append("\n");
+      sb.append("lastName: ").append(lastName).append("\n");
+      sb.append("email: ").append(email).append("\n");
       sb.append("carId: ").append(carId).append("\n");
       return sb.toString();
    }
