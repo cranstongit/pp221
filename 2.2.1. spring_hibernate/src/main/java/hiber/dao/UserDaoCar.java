@@ -11,5 +11,5 @@ public interface UserDao {
    List<User> listUsers();
    List<Car> listCars();
    List<User> getByCar(String model, int series);
-   void deleteTable(String table);
+//   void deleteTable(String table);
 }
