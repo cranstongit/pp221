@@ -16,38 +16,50 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      User user1 = new User("User1", "Lastname1", "user1@mail.ru");
-      User user2 = new User("User2", "Lastname2", "user2@mail.ru");
-      User user3 = new User("User3", "Lastname3", "user3@mail.ru");
-      Car car1 = new Car("Honda", 100);
-      Car car2 = new Car("Ford", 200);
+      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
+      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
+      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
 
-      user1.setCarId(car2);
-      user2.setCarId(car1);
-      user3.setCarId(car1);
-
-      userService.add(user1);
-      userService.add(user2);
-      userService.add(user3);
+      userService.add(new Car("Honda", 100));
+      userService.add(new Car("Ford", 200));
+      userService.add(new Car("Audi", 300));
 
       List<User> users = userService.listUsers();
-      //оставляю на всякий случай т.к. это было изначальной заготовке
       for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = "+user.getLastName());
-         System.out.println("Email = "+user.getEmail());
+         System.out.println("Id = " + user.getId());
+         System.out.println("First Name = " + user.getFirstName());
+         System.out.println("Last Name = " + user.getLastName());
+         System.out.println("Email = " + user.getEmail());
+         System.out.println("Car = " + user.getCarId());
          System.out.println();
+      }
+
+      List<Car> cars = userService.listCars();
+      for (Car car : cars) {
+         System.out.println("Id = " + car.getId());
+         System.out.println("Model = " + car.getModel());
+         System.out.println("Series = " + car.getSeries());
+         System.out.println();
+      }
+
+      for (int i = 0; i < cars.size(); i++) {
+         users.get(i).setCarId(cars.get(i));
+         userService.add(users.get(i));
       }
 
       List<User> usersWithHonda = userService.getByCar("Honda", 100);
       List<User> usersWithFord = userService.getByCar("Ford", 200);
+      List<User> usersWithAudi = userService.getByCar("Audi", 300);
 
       for (User user : usersWithHonda) {
          System.out.println(user);
       }
 
       for (User user : usersWithFord) {
+         System.out.println(user);
+      }
+
+      for (User user : usersWithAudi) {
          System.out.println(user);
       }
 
