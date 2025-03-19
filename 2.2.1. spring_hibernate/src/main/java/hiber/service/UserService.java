@@ -11,5 +11,6 @@ public interface UserService {
     List<User> listUsers();
     List<Car> listCars();
     List<User> getByCar(String model, int series);
-    void deleteTable(String table);
+    void deleteCarTable();
+    void deleteUserTable();
 }

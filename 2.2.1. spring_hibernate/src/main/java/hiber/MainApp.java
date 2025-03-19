@@ -67,8 +67,8 @@ public class MainApp {
       * чтобы не плодить одинаковых пользователей в таблице каждый раз
       * при вызове метода MainApp
       */
-      userService.deleteTable("users");
-      userService.deleteTable("cars");
+      userService.deleteUserTable();
+      userService.deleteCarTable();
 
       context.close();
    }
