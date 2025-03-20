@@ -12,30 +12,23 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImp implements UserService {
+public class CarServiceImp implements CarService {
 
    @Autowired
-   private UserDao userDaoUser;
+   private CarDao userDaoCar;
 
    @Transactional
    @Override
-   public void deleteUserTable() {
-      userDaoUser.deleteUserTable();
+   public void deleteCarTable() {
+      userDaoCar.deleteCarTable();
    }
 
    @Transactional
    @Override
-   public void add(User user) {
-      userDaoUser.add(user);
-   }
+   public void add(Car car) { userDaoCar.add(car); }
 
    @Override
-   public List<User> getByCar(String model, int series) {
-      return userDaoUser.getByCar(model, series);
-   }
-
-   @Override
-   public List<User> listUsers() {
-      return userDaoUser.listUsers();
+   public List<Car> listCars() {
+      return userDaoCar.listCars();
    }
 }
